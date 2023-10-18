@@ -12,6 +12,7 @@ if [ $? -eq 0 ]; then
     if ! pacman -Qs "$package" > /dev/null; then
       echo "Installing $package..."
       sudo pacman -S --needed --noconfirm "$package"
+      installed_packages="$installed_packages\n$package"
     else
       echo "$package is already installed."
     fi
@@ -56,6 +57,9 @@ if [ $? -eq 0 ]; then
   echo "Updating the system..."
   sudo pacman -Syu
 
+  # Initialize the list of installed packages
+  installed_packages=""
+
   # Install packages from the list
   for package in "${packages_to_install[@]}"; do
     install_if_needed "$package"
@@ -77,9 +81,8 @@ if [ $? -eq 0 ]; then
   echo "Installation completed. You can now configure your environment and start using the software."
 
   # List installed packages
-  installed_packages=$(pacman -Qq)
   echo -e "\nInstalled packages:"
-  echo "$installed_packages"
+  echo -e "$installed_packages"
 else
   echo "Sudo authentication failed. Exiting..."
   exit 1
