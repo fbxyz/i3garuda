@@ -34,6 +34,7 @@ if [ $? -eq 0 ]; then
     "imagemagick"
     "ttf-roboto"
     "ttf-font-awesome"
+    "nerd-fonts-git"
     "cmake"
     "base-devel"
     "thunar"
