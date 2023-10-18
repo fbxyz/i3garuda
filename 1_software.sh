@@ -6,58 +6,80 @@ sudo -v
 # Check if sudo authentication was successful
 if [ $? -eq 0 ]; then
 
+  # Define a function to install a package if it's not already installed
+  install_if_needed() {
+    package="$1"
+    if ! pacman -Qs "$package" > /dev/null; then
+      echo "Installing $package..."
+      sudo pacman -S --needed --noconfirm "$package"
+    else
+      echo "$package is already installed."
+    fi
+  }
+
+  # List of packages to install
+  packages_to_install=(
+    "i3status"
+    "i3-gaps"
+    "polybar"
+    "rofi"
+    "picom"
+    "network-manager-applet"
+    "i3blocks"
+    "kitty"
+    "fastfetch"
+    "feh"
+    "scrot"
+    "imagemagick"
+    "ttf-roboto"
+    "ttf-font-awesome"
+    "cmake"
+    "base-devel"
+    "thunar"
+    "inkscape"
+    "flameshot"
+    "nitrogen"
+    "jq"
+    "barrier"
+    "dunst"
+    "kate"
+    "ark"
+    "thunar-archive-plugin"
+    "geary"
+    "git"
+    "redshift"
+    "arandr"
+    "keepassxc"
+  )
+
   # Update the system
   echo "Updating the system..."
   sudo pacman -Syu
 
-  # Install the i3-gaps window manager and related packages
-  echo "Installing i3-gaps and related packages..."
-  sudo pacman -S --noconfirm i3status i3-gaps polybar rofi picom  i3blocks
-
-  # Install a terminal emulator and neofetch
-  echo "Installing terminal emulator and neofetch..."
-  sudo pacman -S --noconfirm kitty neofetch
-  if ! grep -q "#neofetch" ~/.bashrc; then
-    echo -e "\n#neofetch\nneofetch" >> ~/.bashrc
-    echo "Added neofetch command to ~/.bashrc"
-  else
-      echo "neofetch command is already in ~/.bashrc"
-  fi
-
-  # Install image-related packages
-  echo "Installing image-related packages..."
-  sudo pacman -S --noconfirm feh scrot imagemagick
+  # Install packages from the list
+  for package in "${packages_to_install[@]}"; do
+    install_if_needed "$package"
+  done
 
   # Install fonts
-  echo "Installing fonts..."
-  sudo pacman -S --noconfirm ttf-roboto ttf-font-awesome
-  mv weathericons-regular-webfont.ttf ~/.local/share/fonts/
-  fc-cache -f -v
+  if [ -e "weathericons-regular-webfont.ttf" ]; then
+    echo "Installing fonts..."
+    sudo pacman -S --needed --noconfirm ttf-roboto ttf-font-awesome
+    mv weathericons-regular-webfont.ttf ~/.local/share/fonts/
+    fc-cache -f -v
+  fi
 
-  # Install essential packages
-  echo "Installing essential packages..."
-  sudo pacman -S --noconfirm cmake base-devel
-
-  # Install tools
-  echo "Installing tools..."
-  sudo pacman -S --noconfirm thunar inkscape flameshot nitrogen jq barrier dunst kate ark geary
-
-  # Install git
-  echo "Installing git..."
-  sudo pacman -S --noconfirm git
-
-  # Install redshift and arandr
-  echo "Installing redshift and arandr..."
-  sudo pacman -S --noconfirm redshift arandr
-
-  # Install KeePassXC
-  echo "Installing KeePassXC..."
-  sudo pacman -S --noconfirm keepassxc
-
-  # Firewall rule for Barrier
-  sudo firewall-cmd --zone=public --add-port=24800/tcp --permanent
+  # Add fastfetch to .bashrc
+  if ! grep -q "#fastfetch" ~/.bashrc; then
+    echo -e "\n#fastfetch\nfastfetch -l garuda" >> ~/.bashrc
+  fi
 
   echo "Installation completed. You can now configure your environment and start using the software."
+
+  # List installed packages
+  installed_packages=$(pacman -Qq)
+  echo -e "\nInstalled packages:"
+  echo "$installed_packages"
 else
   echo "Sudo authentication failed. Exiting..."
   exit 1
