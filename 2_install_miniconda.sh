@@ -25,6 +25,9 @@ if [ $? -eq 0 ]; then
 
     # Check the installation
     conda --version
+    
+    # Initialize for bash 
+    ~/miniconda3/bin/conda init bash
 
     echo "Miniconda has been successfully installed in the $INSTALL_DIR directory."
     echo "don't forget to chmod +x 2_install_miniconda.sh"
