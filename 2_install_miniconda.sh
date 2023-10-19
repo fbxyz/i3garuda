@@ -27,7 +27,7 @@ if [ $? -eq 0 ]; then
     conda --version
 
     echo "Miniconda has been successfully installed in the $INSTALL_DIR directory."
-    echo "don't forget to chmod +x install_miniconda.sh"
+    echo "don't forget to chmod +x 2_install_miniconda.sh"
 else
     echo "Miniconda download failed."
 fi
