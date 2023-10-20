@@ -1,5 +1,7 @@
 #!/bin/bash
 
+update remote keyring
+
 # Request sudo privileges and keep them active
 sudo -v
 
