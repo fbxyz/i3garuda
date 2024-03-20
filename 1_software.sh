@@ -82,6 +82,13 @@ if [ $? -eq 0 ]; then
     echo -e "\n#fastfetch\nfastfetch -l garuda" >> ~/.bashrc
   fi
 
+  # reshade-linux 
+  mkdir -p ~/Documents/reshade-linux
+  cd ~/Documents/reshade-linux
+  curl -LO https://github.com/kevinlekiller/reshade-steam-proton/raw/main/reshade-linux.sh
+  chmod u+x reshade-linux.sh
+  ./reshade-linux.sh
+
   echo "Installation completed. You can now configure your environment and start using the software."
 
   # List installed packages
