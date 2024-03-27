@@ -55,6 +55,7 @@ if [ $? -eq 0 ]; then
     "redshift"
     "arandr"
     "keepassxc"
+    "chkrootkit"
   )
 
   # Update the system
