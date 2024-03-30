@@ -56,7 +56,6 @@ if [ $? -eq 0 ]; then
     "arandr"
     "keepassxc"
     "chkrootkit"
-    "tomb-git"
   )
 
   # Update the system
