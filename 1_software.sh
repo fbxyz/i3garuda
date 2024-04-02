@@ -1,6 +1,6 @@
 #!/bin/bash
 
-update remote keyring
+# Update remote keyring
 
 # Request sudo privileges and keep them active
 sudo -v
@@ -21,46 +21,96 @@ if [ $? -eq 0 ]; then
   }
 
   # List of packages to install
-  packages_to_install=(
+
+  ### Window Manager and Desktop Environment ###
+  window_manager_and_desktop_environment=(
     "i3status"
     "i3-gaps"
     "polybar"
     "rofi"
     "picom"
-    "network-manager-applet"
     "i3blocks"
+    "dunst"
+    "flameshot"
+    "nerd-fonts-git"
+  )
+
+  ### Terminal and Terminal Utilities ###
+  terminal_and_terminal_utilities=(
     "terminator"
+    "neovim"
+  )
+
+  ### System Utilities ###
+  system_utilities=(
     "fastfetch"
+    "network-manager-applet"
+    "jq"
+    "redshift"
+    "chkrootkit"
+    "sane-epson-perfection-firmware"
+    "nvidia-utils"
+  )
+
+  ### Development Tools ###
+  development_tools=(
+    "base-devel"
+    "cmake"
+    "git"
+  )
+
+  ### Graphic Design and Image Editing Tools ###
+  graphic_design_and_image_editing_tools=(
     "feh"
     "scrot"
     "imagemagick"
-    "ttf-roboto"
-    "ttf-font-awesome"
-    "nerd-fonts-git"
-    "cmake"
-    "base-devel"
-    "thunar"
     "inkscape"
     "krita"
-    "flameshot"
-    "jq"
-    "mono"
-    "barrier"
-    "dunst"
-    "kate"
-    "ark"
+  )
+
+  ### File Management ###
+  file_management=(
+    "thunar"
     "thunar-archive-plugin"
+  )
+
+  ### Office and Productivity Tools ###
+  office_and_productivity_tools=(
+    "kate"
     "geary"
-    "git"
-    "redshift"
-    "arandr"
     "keepassxc"
-    "chkrootkit"
-    "iscan"
-    "iscan-data"
-    "imagescan"
-    "sane-epson-perfection-firmware"
-    "nvidia-utils"
+  )
+
+  ### Gaming Related Tools ###
+  gaming_related_tools=(
+    "steam"
+    "lutris"
+    "heroic"
+    "proton-ge-custom"
+    "protontricks"
+    "vkbasalt"
+    "mangohud"
+    "dxvk-bin"
+    "goverlay-bin"
+    "gwe"
+    "antimicrox"
+    "sc-controller"
+    "droidcam"
+    "xboxdrv"
+    "xbox-generic-controller"
+  )
+
+  # Combine all the categorized packages
+  packages_to_install=(
+    "${window_manager_and_desktop_environment[@]}"
+    "${terminal_and_terminal_utilities[@]}"
+    "${system_utilities[@]}"
+    "${development_tools[@]}"
+    "${graphic_design_and_image_editing_tools[@]}"
+    "${file_management[@]}"
+    "${office_and_productivity_tools[@]}"
+    "${gaming_related_tools[@]}"
+    "weathericons-regular-webfont.ttf" # Fonts
   )
 
   # Update the system
