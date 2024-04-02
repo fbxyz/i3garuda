@@ -20,7 +20,7 @@ set $lockScreenWallpaper /usr/share/wallpapers/garuda-wallpapers/Garuda-Desert.p
 
 ### Applications: ###
 
-set $preferredTerminalEmulator /usr/bin/kitty
+set $preferredTerminalEmulator /usr/bin/terminator
 set $preferredBrowser /usr/bin/firefox
 set $preferredFileManager /usr/bin/thunar
 set $preferredMailClient /usr/bin/geary
@@ -54,11 +54,11 @@ font pango: source code pro 10
 floating_modifier $super
 
 #autostart
-exec --no-startup-id ~/.fehbg
+#exec --no-startup-id ~/.fehbg
 exec --no-startup-id xsettingsd &
 #exec --no-startup-id pasystray
-exec --no-startup-id conky
-exec --no-startup-id conky -c ~/.config/conky/conky-shcts
+#exec --no-startup-id conky
+#exec --no-startup-id conky -c ~/.config/conky/conky-shcts
 exec --no-startup-id copyq
 exec --no-startup-id dunst
 exec --no-startup-id dex -a -s /etc/xdg/autostart/:~/.config/autostart/
@@ -70,6 +70,7 @@ exec --no-startup-id xfce4-power-manager
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id setcursor
 #exec_always --no-startup-id ${HOME}/.config/polybar/launch.sh
+exec_always --no-startup-id ${HOME}/.config/pscircle/pscircle.sh
 exec_always --no-startup-id numlockx on
 exec blueberry-tray
 exec --no-startup-id java -Xmx1024m -jar "/opt/xdman/xdman.jar" -m
@@ -250,23 +251,29 @@ bindsym $super+n border normal
 # panel
 # Start i3bar to display a workspace bar
 
+# class                 border  bground text    indicator child_border
+client.focused          #D89048 #B88853 #FFFFFF #C9BA9B   #483030
+client.focused_inactive #333333 #483030 #7C6F64 #5C524A   #483030
+client.unfocused        #333333 #483030 #7C6F64 #5C524A   #483030
+client.urgent           #333333 #A86030 #FFFFFF #A86030   #A86030
+client.placeholder      #333333 #D4C3A5 #7C6F64 #5C524A   #483030
+
+client.background       #FFFFFF
+
 bar {
-	status_command exec /usr/bin/net-speed.sh
-	#strip_workspace_numbers yes|no
-	#strip_workspace_name yes|no
-	colors {
-    background #2f343f
-    statusline #FFFFFF
+   hidden_state hide
+   status_command exec /usr/bin/net-speed.sh
+   colors {
+    background #303018
+    statusline #F0C078
     separator  #666666
 
-    focused_workspace  #4C7899 #285577 #FFFFFF
-    active_workspace   #333333 #222222 #FFFFFF
-    inactive_workspace #333333 #222222 #888888
-    urgent_workspace   #2F343A #900000 #FFFFFF
-    #binding_mode      #2F343A #900000 #FFFFFF
-    # colour of border, background, and text
-    }
-
+    focused_workspace  #D89048 #B88853 #FFFFFF
+    active_workspace   #333333 #483030 #7C6F64
+    inactive_workspace #333333 #483030 #7C6F64
+    urgent_workspace   #333333 #A86030 #FFFFFF
+    binding_mode       #333333 #A86030 #FFFFFF
+  }
 }
 
 # Open specific applications in floating mode
@@ -307,14 +314,6 @@ assign [class=URxvt] 1
 for_window [class=Viewnior|feh|Audacious|File-roller|Lxappearance|Lxtask|Pavucontrol|upgrade2ultimate.sh] floating enable
 for_window [class=URxvt|firedragon|Geany|Evince|Soffice|libreoffice*|mpv|Ghb|Xfburn|Gimp*|Inkscape|Vlc|Lxappearance|Audacity] focus
 for_window [class=Xfburn|GParted|System-config-printer.py|Lxtask|Pavucontrol|Exo-helper*|Lxrandr|Arandr] focus
-
-# colour of border, background, text, indicator, and child_border
-client.focused              #bf616a #2f343f #d8dee8 #bf616a #d8dee8
-client.focused_inactive     #2f343f #2f343f #d8dee8 #2f343f #2f343f
-client.unfocused            #2f343f #2f343f #d8dee8 #2f343f #2f343f
-client.urgent               #2f343f #2f343f #d8dee8 #2f343f #2f343f
-client.placeholder          #2f343f #2f343f #d8dee8 #2f343f #2f343f
-client.background           #2f343f
 
 
 
@@ -387,8 +386,3 @@ mode "$mode_system" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-
-
-
-
-
