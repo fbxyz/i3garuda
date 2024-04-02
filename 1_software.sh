@@ -56,6 +56,10 @@ if [ $? -eq 0 ]; then
     "arandr"
     "keepassxc"
     "chkrootkit"
+    "iscan"
+    "iscan-data"
+    "imagescan"
+    "sane-epson-perfection-firmware"
   )
 
   # Update the system
