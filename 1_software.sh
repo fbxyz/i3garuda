@@ -60,6 +60,7 @@ if [ $? -eq 0 ]; then
     "iscan-data"
     "imagescan"
     "sane-epson-perfection-firmware"
+    "nvidia-utils"
   )
 
   # Update the system
@@ -99,6 +100,10 @@ if [ $? -eq 0 ]; then
   # List installed packages
   echo -e "\nInstalled packages:"
   echo -e "$installed_packages"
+
+  # Nvidia settings
+  sudo nvidia-xconfig --cool-bits=12
+  nvidia-settings 
 else
   echo "Sudo authentication failed. Exiting..."
   exit 1
