@@ -33,6 +33,7 @@ if [ $? -eq 0 ]; then
     "dunst"
     "flameshot"
     "nerd-fonts-git"
+    "xorg-xwayland"
   )
 
   ### Terminal and Terminal Utilities ###
